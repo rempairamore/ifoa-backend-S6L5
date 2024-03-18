@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', ProjectController::class); 
+Route::resource('/', ProjectController::class);
 Route::resource('/activities', ActivityController::class);

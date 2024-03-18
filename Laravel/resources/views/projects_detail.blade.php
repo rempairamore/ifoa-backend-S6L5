@@ -1,13 +1,12 @@
 @extends('layouts.layout')
-@section('title', 'Project Detail')
+@section('title', 'Related Activities')
 
 @section('content')
     @if($project)
         <div class="row g-0">
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{$project->title}}</h5>
-                    <p class="card-text">Pages: {{$project->pages}}</p>
+                    <h5 class="card-title">Title: {{$project->title}}</h5>
                     <p class="card-text">Year: {{$project->year}}</p>
                     <p class="card-text"><small class="text-body-secondary">Last updated {{$project->updated_at}}</small></p>
                 </div>

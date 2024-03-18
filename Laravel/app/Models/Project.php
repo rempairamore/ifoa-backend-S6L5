@@ -10,6 +10,14 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'pages',
+        'year',
+        'users_id',
+        'activities_id'
+    ];
+
     public function activity()
 {
     return $this->belongsTo(Activity::class);

@@ -6,6 +6,8 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Activity;
 use App\Models\Project;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-       return view('projects',['activities'=> Activity::get()],['project'=> Project::get()]);
+        return view('projects', ['activities' => Activity::get()], ['project' => Project::get()]);
 
     }
 
@@ -23,7 +25,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projectss');
     }
 
     /**
@@ -31,7 +33,18 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->only(['title', 'pages', 'year']);
+        $data['users_id'] = '1';
+        $data['created_at'] = Carbon::now();
+        $randomActivity = Activity::inRandomOrder()->first();
+        if ($randomActivity) {
+            $data['activities_id'] = $randomActivity->id;
+        } else {
+            throw new \Exception("Nessuna attività disponibile.");
+        }
+        
+        Project::create($data);
+        return redirect()->action([ProjectController::class, 'index']);
     }
 
     /**
@@ -39,7 +52,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-       
+
     }
 
     /**
